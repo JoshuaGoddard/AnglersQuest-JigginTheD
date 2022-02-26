@@ -73,9 +73,9 @@
 				var cart = {};
 				cart.items = [];
 			
-				this.storage.setItem( this.cartName, this._toJSONString( cart ) );//*************************CHANGE SHIPPING PRICE*************************
-				this.storage.setItem( this.shippingRates, "0" ); //*************************CHANGE SHIPPING PRICE*************************
-				this.storage.setItem( this.total, "0" );//*************************CHANGE SHIPPING PRICE*************************
+				this.storage.setItem( this.cartName, this._toJSONString( cart ) );
+				this.storage.setItem( this.shippingRates, "0" ); 
+				this.storage.setItem( this.total, "0" );
 			}
 		},
 		
@@ -535,15 +535,15 @@
 				shipping = 2.00;
 			}
 			if( qty >= 6 ) {
-				shipping = 4.00;					//************************************CHANGE SHIPPING***************************************  */
+				shipping = 4.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 			if( qty >= 12 && qty <= 30 ) {  	//************************************CHANGE SHIPPING***************************************  */
-				shipping = 8.00;					//************************************CHANGE SHIPPING***************************************  */
-			}
-			
-			if( qty >= 30 && qty <= 60 ) {
-				shipping = 14.00;	
-			}
+				shipping = 8.00;				//************************************CHANGE SHIPPING***************************************  */
+			}									//************************************CHANGE SHIPPING***************************************  */
+												//************************************CHANGE SHIPPING***************************************  */
+			if( qty >= 30 && qty <= 60 ) {		//************************************CHANGE SHIPPING***************************************  */
+				shipping = 14.00;				//************************************CHANGE SHIPPING***************************************  */
+			}									//************************************CHANGE SHIPPING***************************************  */
 			
 			if( qty > 60 ) {
 				shipping = 0;
