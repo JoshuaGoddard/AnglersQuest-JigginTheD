@@ -82,10 +82,11 @@ h3 {
 
 .navbar-nav li a
 {
+	border: 3px solid lime;
 	float: right;
 	text-align: left;
 	font-size: 20px;
-	background-color: limegreen;
+	background-color: black;
 }
 
 
@@ -146,7 +147,6 @@ h3 {
 	font-size: 36px;
 	text-align: center;
 	color: lime;
-	
 	padding-bottom: 20px;
 	background: black;
 	border: 2px solid lime;
@@ -245,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-top img:hover {
 	transform: scale(1.1);
-	border: solid 3px limegreen;
+	border: solid 3px lime;
 }
 
 .product-top2 img
