@@ -101,6 +101,7 @@
 					var name = cartItem.product;
 					var price = cartItem.price;
 					var qty = cartItem.qty;
+					var size = cartItem.size;
 					
 					$( "<div/>" ).html( "<input type='hidden' name='quantity_" + n + "' value='" + qty + "'/>" ).
 					insertBefore( "#paypal-btn" );
@@ -248,12 +249,18 @@
 				} else {
 				
 				
-					for( var i = 0; i < items.length; ++i ) {
-						var item = items[i];
-						var product = item.product;
-						var price = this.currency + " " + item.price;
+					for( var i = 0; i < items.length; ++i ) {			//**************************CREATE SIZE IN TABLE!******************************* */
+						var item = items[i];							//**************************CREATE SIZE IN TABLE!******************************* */
+						var product = item.product;						//**************************CREATE SIZE IN TABLE!******************************* */
+						var price = this.currency + " " + item.price;	//**************************CREATE SIZE IN TABLE!******************************* */
 						var qty = item.qty;
-						var html = "<tr><td class='pname'>" + product + "</td>" + "<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";
+						//var size = document.getElementById("size").options.item(0).text;
+  							//	   document.getElementById("theSize").innerHTML = size;
+						var size = document.getElementById( "size");
+								   item.size = size; 
+																			//**************************CREATE SIZE IN TABLE!******************************* */
+						var html = "<tr><td class='pname'>" + product + "</td>" + "<td id='size'><input type='text' value='" + size + "' id='size'/></td>" +
+						"<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";  //NEED TO: Create this.Size in JS and pull the ID from the HTML
 					    	html += "<td class='pprice'>" + price + "</td><td class='pdelete'><a href='' data-product='" + product + "'>&times;</a></td></tr>";
 					
 						$tableCartBody.html( $tableCartBody.html() + html );
@@ -277,11 +284,16 @@
 				
 					for( var j = 0; j < cartItems.length; ++j ) {
 						var cartItem = cartItems[j];
+						var cartSize = document.getElementById("size");
 						var cartProduct = cartItem.product;
 						var cartPrice = this.currency + " " + cartItem.price;
 						var cartQty = cartItem.qty;
-						var cartHTML = "<tr><td class='pname'>" + cartProduct + "</td>" + "<td class='pqty'>" + cartQty + "</td>" + "<td class='pprice'>" + cartPrice + "</td></tr>";
-					
+						var cartHTML = "<tr><td class='pname'>" + cartProduct + "</td>" + "<td class='psize'>" + cartSize + "</td>" + "<td class='pqty'>" + cartQty + "</td>" + "<td class='pprice'>" + cartPrice + "</td></tr>";
+													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
+													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
+													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
+													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
+													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
 						$cartBody.html( $cartBody.html() + cartHTML );
 					}
 				} else {
@@ -297,8 +309,8 @@
 					this.$subTotal[0].innerHTML = this.currency + " " + this._convertNumber( subTot );
 					this.$shipping[0].innerHTML = this.currency + " " + cartShipping;
 				} else {
-					this.$subTotal[0].innerHTML = this.currency + " " + 0.00;
-					this.$shipping[0].innerHTML = this.currency + " " + 0.00;	
+					this.$subTotal[0].innerHTML = this.currency + " " + 0;
+					this.$shipping[0].innerHTML = this.currency + " " + 0;	
 				}
 			
 			}
@@ -332,7 +344,7 @@
 				var updatedCart = {};
 				updatedCart.items = [];
 				
-				$rows.each(function() {
+				$rows.each(function() {										//********************************POSSIBLY DISPLAY SIZE!****************************
 					var $row = $( this );
 					var pname = $.trim( $row.find( ".pname" ).text() );
 					var pqty = self._convertString( $row.find( ".pqty > .qty" ).val() );
@@ -366,6 +378,8 @@
 			self.$formAddToCart.each(function() {
 				var $form = $( this );
 				var $product = $form.parent();
+				var size = document.getElementById( "size");
+				//ADD SIZE ************************ ************************ ************************ ************************ ************************ ************************ ************************ ************************
 				var price = self._convertString( $product.data( "price" ) );
 				var name =  $product.data( "name" );
 				
@@ -378,7 +392,7 @@
 					self._addToCart({
 						product: name,
 						price: price,
-						qty: qty
+						qty: qty,
 					});
 					var shipping = self._convertString( self.storage.getItem( self.shippingRates ) );
 					var shippingRates = self._calculateShipping( qty );
@@ -531,21 +545,23 @@
 		
 		_calculateShipping: function( qty ) {
 			var shipping = 0;
-			if (qty <= 5) {
-				shipping = 2.00;
+			if (qty >= 1 && qty <= 5 ) {
+				shipping = 1.99;
 			}
-			if( qty >= 6 ) {
-				shipping = 4.00;				//************************************CHANGE SHIPPING***************************************  */
-			}									//************************************CHANGE SHIPPING***************************************  */
-			if( qty >= 12 && qty <= 30 ) {  	//************************************CHANGE SHIPPING***************************************  */
+
+			if ( qty >= 6 ) {
+				shipping = 3.00;				
+			}
+												//************************************CHANGE SHIPPING***************************************  */
+			if ( qty >= 12 && qty <= 30 ) {  	//************************************CHANGE SHIPPING***************************************  */
 				shipping = 8.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 												//************************************CHANGE SHIPPING***************************************  */
-			if( qty >= 30 && qty <= 60 ) {		//************************************CHANGE SHIPPING***************************************  */
+			if ( qty >= 30 && qty <= 60 ) {		//************************************CHANGE SHIPPING***************************************  */
 				shipping = 14.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 			
-			if( qty > 60 ) {
+			if ( qty > 60 ) {
 				shipping = 0;
 			}
 			
