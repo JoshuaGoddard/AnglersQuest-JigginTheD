@@ -59,8 +59,6 @@
 			this.displayUserDetails();
 			this.populatePayPalForm();
 			this.requirejs();
-			
-			
 		},
 		
 		// Public methods
@@ -111,7 +109,7 @@
 					insertBefore( "#paypal-btn" );
 					$( "<div/>" ).html( "<input type='hidden' name='amount_" + n + "' value='" + self._formatNumber( price, 2 ) + "'/>" ).
 					insertBefore( "#paypal-btn" );
-					$( "<div/>" ).html( "<input type='hidden' name='shipping_" + n + "' value='" + self._formatNumber( singShipping, 2 ) + "'/>" ).
+					$( "<div/>" ).html( "<input type='hidden' name='shipping_" + n + "' value='" + self._formatNumber( singShipping , 2 ) + "'/>" ).
 					insertBefore( "#paypal-btn" );
 					
 				}
@@ -284,7 +282,7 @@
 				
 					for( var j = 0; j < cartItems.length; ++j ) {
 						var cartItem = cartItems[j];
-						var cartSize = document.getElementById("size");
+						var cartSize = cartItem.size; 
 						var cartProduct = cartItem.product;
 						var cartPrice = this.currency + " " + cartItem.price;
 						var cartQty = cartItem.qty;
