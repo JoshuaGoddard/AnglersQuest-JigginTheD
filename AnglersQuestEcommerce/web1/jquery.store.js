@@ -99,7 +99,7 @@
 					var name = cartItem.product;
 					var price = cartItem.price;
 					var qty = cartItem.qty;
-					var size = cartItem.size;
+					var size = cartItem.size; //??????
 					
 					$( "<div/>" ).html( "<input type='hidden' name='quantity_" + n + "' value='" + qty + "'/>" ).
 					insertBefore( "#paypal-btn" );
@@ -376,7 +376,7 @@
 			self.$formAddToCart.each(function() {
 				var $form = $( this );
 				var $product = $form.parent();
-				var size = document.getElementById( "size");
+				var size = document.getElementById( "size"); //? 
 				//ADD SIZE ************************ ************************ ************************ ************************ ************************ ************************ ************************ ************************
 				var price = self._convertString( $product.data( "price" ) );
 				var name =  $product.data( "name" );
@@ -403,7 +403,7 @@
 		
 		// Handles the checkout form by adding a validation routine and saving user's info into the session storage
 		
-		handleCheckoutOrderForm: function() {
+		handleCheckoutOrderForm: function() {     //I think this is where the shipping is not getting added to the paypal form 
 			var self = this;
 			if( self.$checkoutOrderForm.length ) {
 				var $sameAsBilling = $( "#same-as-billing" );
