@@ -1,6 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic);
 
 
+.resizeImage {
+	height: 100;
+	width: 200px;
+}
 
 *{
 	margin:0;
