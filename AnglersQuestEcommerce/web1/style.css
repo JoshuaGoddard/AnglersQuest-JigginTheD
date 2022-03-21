@@ -7,6 +7,10 @@
 	padding: 0;
 }
 
+/*html {
+	background-color: lime;
+}*/
+
 #nav-bar
 {
 	position:sticky;
@@ -20,7 +24,7 @@
 }
 
 h3 {
-	text-decoration: underline green;
+	text-decoration: underline lime;
 }
 
 /* Add a black background color to the top navigation bar */
@@ -98,7 +102,7 @@ h3 {
 .navbar
 {
 	background-color: black; /* #212020 , */
-	margin-bottom: 20px;
+	margin-bottom: 1px;
 }
 
 .navbar-toggler
@@ -126,6 +130,7 @@ h3 {
 .featured-categories
 {
 	margin: 50px 0;
+	background-color: gainsboro;
 }
 
 .featured-categories img
