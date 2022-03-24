@@ -59,6 +59,7 @@
 			this.displayUserDetails();
 			this.populatePayPalForm();
 			this.requirejs();
+			this.setSize(); //Method invoked for setting size.
 		},
 		
 		// Public methods
@@ -77,6 +78,11 @@
 			}
 		},
 		
+		//Grabs the class "size" from the HTML <select> tags and creates a container which will display the selected size from the <option> tags within the <select> tags
+		setSize: function() {
+			var size = document.getElementsByClassName("size");
+		},
+
 		// Appends the required hidden values to the PayPal's form before submitting
 		
 		populatePayPalForm: function() {
@@ -252,12 +258,10 @@
 						var product = item.product;						//**************************CREATE SIZE IN TABLE!******************************* */
 						var price = this.currency + " " + item.price;	//**************************CREATE SIZE IN TABLE!******************************* */
 						var qty = item.qty;
-						//var size = document.getElementById("size").options.item(0).text;
-  							//	   document.getElementById("theSize").innerHTML = size;
-						var size = document.getElementById( "size");
-								   item.size = size; 
+						var size = document.getElementsByClassName("size");   //already instanciated in the setSize() method.
+						
 																			//**************************CREATE SIZE IN TABLE!******************************* */
-						var html = "<tr><td class='pname'>" + product + "</td>" + "<td id='size'><input type='text' value='" + size + "' id='size'/></td>" +
+						var html = "<tr><td class='pname'>" + product + "</td>" + "<td id='size'><input type='text' value='" + size + "' class='size'/></td>" +
 						"<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";  //NEED TO: Create this.Size in JS and pull the ID from the HTML
 					    	html += "<td class='pprice'>" + price + "</td><td class='pdelete'><a href='' data-product='" + product + "'>&times;</a></td></tr>";
 					
@@ -544,19 +548,19 @@
 		_calculateShipping: function( qty ) {
 			var shipping = 0;
 			if (qty >= 1 && qty <= 5 ) {
-				shipping = 1.99;
+				shipping = 1.00;
 			}
 
 			if ( qty >= 6 ) {
-				shipping = 3.00;				
+				shipping = 2.00;				
 			}
 												//************************************CHANGE SHIPPING***************************************  */
 			if ( qty >= 12 && qty <= 30 ) {  	//************************************CHANGE SHIPPING***************************************  */
-				shipping = 8.00;				//************************************CHANGE SHIPPING***************************************  */
+				shipping = 3.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 												//************************************CHANGE SHIPPING***************************************  */
 			if ( qty >= 30 && qty <= 60 ) {		//************************************CHANGE SHIPPING***************************************  */
-				shipping = 14.00;				//************************************CHANGE SHIPPING***************************************  */
+				shipping = 4.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 			
 			if ( qty > 60 ) {
