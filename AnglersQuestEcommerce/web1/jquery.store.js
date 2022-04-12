@@ -58,7 +58,7 @@
 			this.deleteProduct();
 			this.displayUserDetails();
 			this.populatePayPalForm();
-			this.requirejs();
+			
 			this.setSize(); //Method invoked for setting size.
 		},
 		
@@ -81,7 +81,7 @@
 		//Grabs the class "size" from the HTML <select> tags and creates a container which will display the selected size from the <option> tags within the <select> tags
 		setSize: function() {
 			var size = document.getElementsByClassName("size");
-			console.log(size);
+			//console.log(size);
 		},
 
 		// Appends the required hidden values to the PayPal's form before submitting
@@ -262,8 +262,10 @@
 						var size = document.getElementsByClassName("size");   //already instanciated in the setSize() method.
 						
 																			//**************************CREATE SIZE IN TABLE!******************************* */
-						var html = "<tr><td class='pname'>" + product + "</td>" + "<td class='psize'><input type='text' value='3/8 oz'" + size + "' class='size'/></td>" +
-						"<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";  //NEED TO: Create this.Size in JS and pull the ID from the HTML
+						var html = "<tr><td class='pname'>" + product + "</td>" + 
+									"<td class='psize'><input type='text' value='3/8 oz' " + size + " /></td>" +
+									"<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";  //NEED TO: Create this.Size in JS and pull the ID from the HTML
+									
 					    	html += "<td class='pprice'>" + price + "</td><td class='pdelete'><a href='' data-product='" + product + "'>&times;</a></td></tr>";
 					
 						$tableCartBody.html( $tableCartBody.html() + html );
