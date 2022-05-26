@@ -193,7 +193,7 @@
 			}
 		},
 
-		// Delete a product from the shopping cart
+		
 
 		deleteProduct: function() {
 			var self = this;
@@ -240,7 +240,7 @@
 			}
 		},
 		
-		// Displays the shopping cart
+		
 		
 		displayCart: function() {
 			if( this.$formCart.length ) {
