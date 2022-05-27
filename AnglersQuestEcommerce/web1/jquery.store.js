@@ -295,12 +295,17 @@
 						var cartProduct = cartItem.product;
 						var cartPrice = this.currency + " " + cartItem.price;
 						var cartQty = cartItem.qty;
-						var cartHTML = "<tr><td class='pname'>" + cartProduct + "</td>" + "<td class='psize'>" + cartSize + "</td>" + "<td class='pqty'>" + cartQty + "</td>" + "<td class='pprice'>" + cartPrice + "</td></tr>";
+						var cartHTML = "<tr><td class='pname'>" + cartProduct 
+																+ "</td>" 
+																+ "<td class='psize'>" 
+																+ cartSize + "</td>" 
+																+ "<td class='pqty'>" 
+																+ cartQty + "</td>" 
+																+ "<td class='pprice'>" 
+																+ cartPrice 
+																+ "</td></tr>";
 													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
+						
 						$cartBody.html( $cartBody.html() + cartHTML );
 					}
 				} else {
@@ -351,7 +356,7 @@
 				var updatedCart = {};
 				updatedCart.items = [];
 				
-				$rows.each(function() {										//********************************POSSIBLY DISPLAY SIZE!****************************
+				$rows.each(function() {									
 					var $row = $( this );
 					var pname = $.trim( $row.find( ".pname" ).text() );
 					var pqty = self._convertString( $row.find( ".pqty > .qty" ).val() );
@@ -405,7 +410,7 @@
 					var shippingRates = self._calculateShipping( qty );
 					var totalShipping = shipping + shippingRates;
 					
-					self.storage.setItem( self.shippingRates, totalShipping ); //******************************NEED TO CALCULATE SHIPPING!"" */
+					self.storage.setItem( self.shippingRates, totalShipping ); 
 				});
 			});
 		},
@@ -557,7 +562,8 @@
 			}
 
 			if ( qty >= 6 ) {
-				shipping = 2.00;				
+				shipping = 2.00;				//OTHER IDEA! Write a shippingWeight() method based on the total weight of the jig heads!
+												//Substitute qty for weight
 			}
 												//************************************CHANGE SHIPPING***************************************  */
 			if ( qty >= 12 && qty <= 30 ) {  	//************************************CHANGE SHIPPING***************************************  */
@@ -672,5 +678,6 @@
 	});
 
 })( jQuery );
+
 
 
