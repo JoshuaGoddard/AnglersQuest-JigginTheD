@@ -58,7 +58,8 @@
 			this.deleteProduct();
 			this.displayUserDetails();
 			this.populatePayPalForm();
-			this.requirejs();
+			
+			this.setSize(); //Method invoked for setting size.
 		},
 		
 		// Public methods
@@ -77,6 +78,12 @@
 			}
 		},
 		
+		//Grabs the class "size" from the HTML <select> tags and creates a container which will display the selected size from the <option> tags within the <select> tags
+		setSize: function() {
+			var size = document.getElementsByClassName("size");
+			//console.log(size);
+		},
+
 		// Appends the required hidden values to the PayPal's form before submitting
 		
 		populatePayPalForm: function() {
@@ -86,7 +93,7 @@
 				var cart = self._toJSONObject( self.storage.getItem( self.cartName ) );
 				var shipping = self.storage.getItem( self.shippingRates );
 				var numShipping = self._convertString( shipping );
-				var cartItems = cart.items; 
+				var cartItems = cart.items;
 				var singShipping = Math.floor( numShipping / cartItems.length );
 				
 				$form.attr( "action", self.paypalURL );
@@ -186,7 +193,7 @@
 			}
 		},
 
-		// Delete a product from the shopping cart
+		
 
 		deleteProduct: function() {
 			var self = this;
@@ -233,7 +240,7 @@
 			}
 		},
 		
-		// Displays the shopping cart
+		
 		
 		displayCart: function() {
 			if( this.$formCart.length ) {
@@ -252,16 +259,18 @@
 						var product = item.product;						//**************************CREATE SIZE IN TABLE!******************************* */
 						var price = this.currency + " " + item.price;	//**************************CREATE SIZE IN TABLE!******************************* */
 						var qty = item.qty;
-						//var size = document.getElementById("size").options.item(0).text;
-  							//	   document.getElementById("theSize").innerHTML = size;
-						var size = document.getElementById( "size");
-								   item.size = size; 
+						var size = document.getElementsByClassName("size");   //already instanciated in the setSize() method.
+						
 																			//**************************CREATE SIZE IN TABLE!******************************* */
-						var html = "<tr><td class='pname'>" + product + "</td>" + "<td id='size'><input type='text' value='" + size + "' id='size'/></td>" +
-						"<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";  //NEED TO: Create this.Size in JS and pull the ID from the HTML
+						var html = "<tr><td class='pname'>" + product + "</td>" + 
+									"<td class='psize'><input type='text' value='3/8 oz' " + size + " /></td>" +
+									"<td class='pqty'><input type='text' value='" + qty + "' class='qty'/></td>";  //NEED TO: Create this.Size in JS and pull the ID from the HTML
+									
 					    	html += "<td class='pprice'>" + price + "</td><td class='pdelete'><a href='' data-product='" + product + "'>&times;</a></td></tr>";
 					
 						$tableCartBody.html( $tableCartBody.html() + html );
+
+						console.log(size);
 					}
 
 				}
@@ -286,12 +295,17 @@
 						var cartProduct = cartItem.product;
 						var cartPrice = this.currency + " " + cartItem.price;
 						var cartQty = cartItem.qty;
-						var cartHTML = "<tr><td class='pname'>" + cartProduct + "</td>" + "<td class='psize'>" + cartSize + "</td>" + "<td class='pqty'>" + cartQty + "</td>" + "<td class='pprice'>" + cartPrice + "</td></tr>";
+						var cartHTML = "<tr><td class='pname'>" + cartProduct 
+																+ "</td>" 
+																+ "<td class='psize'>" 
+																+ cartSize + "</td>" 
+																+ "<td class='pqty'>" 
+																+ cartQty + "</td>" 
+																+ "<td class='pprice'>" 
+																+ cartPrice 
+																+ "</td></tr>";
 													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
-													//********************************DISPLAY SIZE FOR CHECKOUT FORM!****************************
+						
 						$cartBody.html( $cartBody.html() + cartHTML );
 					}
 				} else {
@@ -342,7 +356,7 @@
 				var updatedCart = {};
 				updatedCart.items = [];
 				
-				$rows.each(function() {										//********************************POSSIBLY DISPLAY SIZE!****************************
+				$rows.each(function() {									
 					var $row = $( this );
 					var pname = $.trim( $row.find( ".pname" ).text() );
 					var pqty = self._convertString( $row.find( ".pqty > .qty" ).val() );
@@ -396,7 +410,7 @@
 					var shippingRates = self._calculateShipping( qty );
 					var totalShipping = shipping + shippingRates;
 					
-					self.storage.setItem( self.shippingRates, totalShipping ); //******************************NEED TO CALCULATE SHIPPING!"" */
+					self.storage.setItem( self.shippingRates, totalShipping ); 
 				});
 			});
 		},
@@ -544,19 +558,20 @@
 		_calculateShipping: function( qty ) {
 			var shipping = 0;
 			if (qty >= 1 && qty <= 5 ) {
-				shipping = 1.99;
+				shipping = 1.00;
 			}
 
 			if ( qty >= 6 ) {
-				shipping = 3.00;				
+				shipping = 2.00;				//OTHER IDEA! Write a shippingWeight() method based on the total weight of the jig heads!
+												//Substitute qty for weight
 			}
 												//************************************CHANGE SHIPPING***************************************  */
 			if ( qty >= 12 && qty <= 30 ) {  	//************************************CHANGE SHIPPING***************************************  */
-				shipping = 8.00;				//************************************CHANGE SHIPPING***************************************  */
+				shipping = 3.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 												//************************************CHANGE SHIPPING***************************************  */
 			if ( qty >= 30 && qty <= 60 ) {		//************************************CHANGE SHIPPING***************************************  */
-				shipping = 14.00;				//************************************CHANGE SHIPPING***************************************  */
+				shipping = 4.00;				//************************************CHANGE SHIPPING***************************************  */
 			}									//************************************CHANGE SHIPPING***************************************  */
 			
 			if ( qty > 60 ) {
@@ -663,5 +678,6 @@
 	});
 
 })( jQuery );
+
 
 
